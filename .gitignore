@@ -16,4 +16,4 @@ dist/**/*.pyd
 !README.md
 !LICENSE
 !.gitignore
-!Nepali Date.app
+!Nepali\ Date.app/

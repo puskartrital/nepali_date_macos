@@ -58,6 +58,11 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
    cp -r "dist/Nepali Date.app" /Applications/
    ```
 
+6. Simply you can build and install from the script itself as well.
+```
+chmod +x build_with_pyinstaller.sh
+./build_with_pyinstaller.sh
+```
 ## Usage
 
 Once installed, the app will appear in your menu bar showing the current Nepali date. 

@@ -1,30 +1,25 @@
-# First ignore everything
-*
-*/
-
-# Allow only specific files and directories
-!README.md
-!LICENSE
-!.gitignore
-
-# Allow just the actual executable application
-!dist/
-!dist/Nepali Date.app/
-!dist/Nepali Date.app/Contents/
-!dist/Nepali Date.app/Contents/MacOS/
-!dist/Nepali Date.app/Contents/MacOS/Nepali Date
-
-# But exclude all other app contents to keep repo clean
-dist/Nepali Date.app/Contents/Frameworks/
-dist/Nepali Date.app/Contents/Resources/
-dist/Nepali Date.app/Contents/_CodeSignature/
-dist/Nepali Date.app/Contents/PkgInfo
-dist/Nepali Date.app/Contents/Info.plist
-
-# Ignore all build artifacts and caches
-**/__pycache__/
-**/*.py[cod]
-**/.DS_Store
+# Ignore build artifacts
+dist/
 build/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 *.spec
 venv/
+.venv/
+env/
+.env/
+
+# Ignore OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keep only source code and documentation
+# All other files will be included by default

@@ -1,0 +1,14 @@
+{
+  "manual_nepali_date": {
+    "year": 2081,
+    "month": 12,
+    "day": 22
+  },
+  "reference_english_date": {
+    "year": 2024,
+    "month": 4,
+    "day": 5
+  },
+  "created_at": "2025-04-05 06:26:36",
+  "notes": "Fixed reference: 22 Chaitra 2081 = April 5, 2024"
+}

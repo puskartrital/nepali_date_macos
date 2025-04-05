@@ -9,13 +9,53 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
 - Shows the current Nepali date in your macOS menu bar
 - Automatically updates every 5 minutes
 - Displays both the date and day of week in Nepali language
+- Uses HamroPatro API for accurate date conversion
 
-## Installation
+## Build Instructions
 
-1. [Download the latest release](https://github.com/puskartrital/nepali_date_macos/releases/latest)
-2. Unzip the downloaded file
-3. Drag "Nepali Date.app" to your Applications folder
-4. Launch the app
+### Prerequisites
+- macOS 10.15 or later
+- Python 3.8 or later
+- pip3
+
+### Building from Source
+
+1. Clone this repository
+   ```bash
+   git clone https://github.com/puskartrital/nepali_date_macos.git
+   cd nepali_date_macos
+   ```
+
+2. Install dependencies
+   ```bash
+   pip3 install -r requirements.txt
+   pip3 install pyinstaller
+   ```
+
+3. Create the icon
+   ```bash
+   python3 create_icon.py
+   # Or use makeicns if you have it installed
+   # makeicns -in calendar.png -out calendar.icns
+   ```
+
+4. Build the app
+   ```bash
+   pyinstaller --name="Nepali Date" \
+               --windowed \
+               --noconfirm \
+               --clean \
+               --add-data="calendar.png:." \
+               --hidden-import=rumps \
+               --hidden-import=requests \
+               --icon="calendar.icns" \
+               nepali_date_statusbar.py
+   ```
+
+5. The app will be created in the `dist` folder. Copy it to your Applications folder:
+   ```bash
+   cp -r "dist/Nepali Date.app" /Applications/
+   ```
 
 ## Usage
 
@@ -44,7 +84,7 @@ If the app doesn't show the correct date:
 
 ## Privacy
 
-This app only connects to the  API to convert the current date. No personal data is collected or transmitted.
+This app only connects to the HamroPatro API to convert the current date. No personal data is collected or transmitted.
 
 ## Credits
 

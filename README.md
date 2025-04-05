@@ -34,6 +34,7 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
 
 3. Create the icon
    ```bash
+   brew install makeicns
    python3 create_icon.py
    # Or use makeicns if you have it installed
    # makeicns -in calendar.png -out calendar.icns

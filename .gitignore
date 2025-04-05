@@ -2,14 +2,10 @@
 *
 */
 
-# Whitelist only the executable app file
-!dist/
-!dist/Nepali Date/
-!dist/Nepali Date/Nepali Date
 
 # Ignore all internal directories and other build artifacts
 dist/Nepali Date/_internal/
-dist/Nepali Date.app/
+dist/Nepali Date.app/**
 dist/**/*.so
 dist/**/*.dylib
 dist/**/*.py

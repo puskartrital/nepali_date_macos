@@ -1,16 +1,20 @@
 # Ignore everything
 *
 */
-.*
-.*/*
 
-# Whitelist only the built app
+# Whitelist only the executable app file
+!dist/
+!dist/Nepali Date/
 !dist/Nepali Date/Nepali Date
 
-# Exclude _internal and other unnecessary files from the app
+# Ignore all internal directories and other build artifacts
 dist/Nepali Date/_internal/
-dist/Nepali Date/.DS_Store
-dist/Nepali Date/**/.DS_Store
+dist/Nepali Date.app/
+dist/**/*.so
+dist/**/*.dylib
+dist/**/*.py
+dist/**/*.pyc
+dist/**/*.pyd
 
 # Whitelist documentation
 !README.md

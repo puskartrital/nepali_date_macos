@@ -5,9 +5,7 @@
 .*/*
 
 # Whitelist only the built app
-!dist/
-!dist/Nepali Date.app/
-!dist/Nepali Date.app/**/*
+!dist/Nepali Date/Nepali Date
 
 # Exclude _internal and other unnecessary files from the app
 dist/Nepali Date/_internal/

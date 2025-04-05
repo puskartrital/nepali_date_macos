@@ -1,19 +1,21 @@
-# Ignore everything
+# Ignore most files and directories
 *
 */
 
+# Don't ignore important documentation and files
+!README.md
+!LICENSE
+!.gitignore
 
-# Ignore all internal directories and other build artifacts
+# Don't ignore the app in the root directory
+!/Nepali Date.app/
+!/Nepali Date.app/**
+
+# Still ignore unnecessary build artifacts
 dist/Nepali Date/_internal/
-dist/Nepali Date.app/**
 dist/**/*.so
 dist/**/*.dylib
 dist/**/*.py
 dist/**/*.pyc
 dist/**/*.pyd
-
-# Whitelist documentation
-!README.md
-!LICENSE
-!.gitignore
-!Nepali\ Date.app/
+**/.DS_Store

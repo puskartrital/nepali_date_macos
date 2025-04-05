@@ -1,0 +1,20 @@
+# Ignore everything
+*
+*/
+.*
+.*/*
+
+# Whitelist only the built app
+!dist/
+!dist/Nepali Date.app/
+!dist/Nepali Date.app/**/*
+
+# Exclude _internal and other unnecessary files from the app
+dist/Nepali Date/_internal/
+dist/Nepali Date/.DS_Store
+dist/Nepali Date/**/.DS_Store
+
+# Whitelist documentation
+!README.md
+!LICENSE
+!.gitignore

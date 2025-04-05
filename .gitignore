@@ -16,3 +16,4 @@ dist/**/*.pyd
 !README.md
 !LICENSE
 !.gitignore
+!Nepali Date

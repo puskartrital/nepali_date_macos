@@ -1,14 +1,14 @@
 # Nepali Date Status Bar App
 
-A simple macOS status bar app that displays the current Nepali date (BS/Bikram Sambat) in your menu bar.
+A simple macOS status bar app that displays the current Nepali date (BS/Bikram Sambat) in `YYYY-MM-DD, Day Name` format (e.g., `२०८१-०१-१३, आइतबार`) in your menu bar.
 
 ![Nepali Date Screenshot](https://i.postimg.cc/cLD0BQn3/i-Screen-Shoter-2025040564334840-AM.jpg)
 
 ## Features
 
-- Shows the current Nepali date in your macOS menu bar
+- Shows the current Nepali date in `YYYY-MM-DD, Day Name` format in your macOS menu bar
 - Automatically updates every 5 minutes
-- Displays both the date and day of week in Nepali language
+- Displays the date and day of week using Nepali digits and language
 - Uses HamroPatro API for accurate date conversion
 
 ## Build Instructions
@@ -65,7 +65,7 @@ chmod +x build_with_pyinstaller.sh
 ```
 ## Usage
 
-Once installed, the app will appear in your menu bar showing the current Nepali date. 
+Once installed, the app will appear in your menu bar showing the current Nepali date in the format `YYYY-MM-DD, Day Name` (e.g., `२०८१-०१-१३, आइतबार`).
 
 The menu provides the following options:
 - **Refresh**: Manually update the date

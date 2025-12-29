@@ -1,15 +1,15 @@
 # Nepali Date Status Bar App
 
-A simple macOS status bar app that displays the current Nepali date (BS/Bikram Sambat) in `YYYY-MM-DD, Day Name` format (e.g., `२०८१-०१-१३, आइतबार`) in your menu bar.
+A simple macOS status bar app that displays the current Nepali date (BS/Bikram Sambat) in your menu bar.
 
 ![Nepali Date Screenshot](https://i.postimg.cc/cLD0BQn3/i-Screen-Shoter-2025040564334840-AM.jpg)
 
 ## Features
 
-- Shows the current Nepali date in `YYYY-MM-DD, Day Name` format in your macOS menu bar
+- Shows the current Nepali date in `DD Month YYYY, Day` format (e.g., `१४ पुष २०८२, सोमबार`)
 - Automatically updates every 5 minutes
-- Displays the date and day of week using Nepali digits and language
-- Uses HamroPatro API for accurate date conversion
+- Displays date and day of week using Nepali digits and language
+- Works offline - uses `nepali-datetime` library for local date calculation (no internet required)
 
 ## Build Instructions
 
@@ -18,7 +18,15 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
 - Python 3.8 or later
 - pip3
 
-### Building from Source
+### Quick Build (Recommended)
+
+Simply run the build script:
+```bash
+chmod +x build_with_pyinstaller.sh
+./build_with_pyinstaller.sh
+```
+
+### Building from Source (Manual)
 
 1. Clone this repository
    ```bash
@@ -48,7 +56,8 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
                --clean \
                --add-data="calendar.png:." \
                --hidden-import=rumps \
-               --hidden-import=requests \
+               --hidden-import=nepali_datetime \
+               --collect-all=nepali_datetime \
                --icon="calendar.icns" \
                nepali_date_statusbar.py
    ```
@@ -58,14 +67,9 @@ A simple macOS status bar app that displays the current Nepali date (BS/Bikram S
    cp -r "dist/Nepali Date.app" /Applications/
    ```
 
-6. Simply you can build and install from the script itself as well.
-```
-chmod +x build_with_pyinstaller.sh
-./build_with_pyinstaller.sh
-```
 ## Usage
 
-Once installed, the app will appear in your menu bar showing the current Nepali date in the format `YYYY-MM-DD, Day Name` (e.g., `२०८१-०१-१३, आइतबार`).
+Once installed, the app will appear in your menu bar showing the current Nepali date in the format `DD Month YYYY, Day` (e.g., `१४ पुष २०८२, सोमबार`).
 
 The menu provides the following options:
 - **Refresh**: Manually update the date
@@ -84,17 +88,17 @@ To have the app start automatically when you log in:
 ## Troubleshooting
 
 If the app doesn't show the correct date:
-- Check your internet connection (the app needs to access the HamroPatro API)
 - Quit and restart the app using the menu option
 - Make sure your system date and time are correct
+- Check Console.app for any error logs from "Nepali Date"
 
 ## Privacy
 
-This app only connects to the HamroPatro API to convert the current date. No personal data is collected or transmitted.
+This app works completely offline. No data is collected or transmitted. The Nepali date is calculated locally using the `nepali-datetime` Python library.
 
 ## Credits
 
-- Date conversion provided by [HamroPatro](https://www.hamropatro.com/)
+- Date calculation powered by [nepali-datetime](https://pypi.org/project/nepali-datetime/)
 - Developed by [Puskar Trital](https://github.com/puskartrital)
 
 ## License

@@ -4,10 +4,9 @@ from datetime import datetime
 import threading
 import time
 import os
-import requests
-import re
 import sys
 import webbrowser
+from nepali_datetime import date as nepali_date
 
 class NepaliDateStatusBarApp(rumps.App):
     def __init__(self):
@@ -71,69 +70,50 @@ class NepaliDateStatusBarApp(rumps.App):
                 nepali_number += digit
         return nepali_number
 
-    def get_nepali_date_from_hamropatro(self):
+    def get_nepali_date_local(self):
         """
-        Get Nepali date from HamroPatro API
-        Returns the Nepali date string or None if failed
+        Get Nepali date using nepali-datetime library (no network required)
+        Returns the full Nepali date string with day name
+        Format: "१४ पुष २०८१, सोमबार"
         """
         try:
-            today = datetime.now()
-            date_str = today.strftime('%Y-%m-%d')
+            # Get today's Nepali date using the library
+            today_nepali = nepali_date.today()
             
-            # Make a POST request to HamroPatro API
-            response = requests.post(
-                'https://www.hamropatro.com/getMethod.php',
-                data={
-                    'actionName': 'wdconverter',
-                    'datefield': date_str,
-                    'convert_option': 'eng_to_nep'
-                },
-                headers={
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
-                },
-                timeout=5  # 5 seconds timeout
-            )
+            # Get day of week from English date
+            eng_weekday = datetime.now().weekday()
+            day_name = self.get_nepali_day_name(eng_weekday)
             
-            if response.status_code == 200:
-                response_text = response.text.strip()
-                print(f"HamroPatro API response: {response_text}")
-                
-                # Extract content inside <span> tags
-                span_pattern = r'<span>(.*?)</span>'
-                span_match = re.search(span_pattern, response_text)
-                
-                if span_match:
-                    nepali_date_str = span_match.group(1)  # "२०८१ चैत २२"
-                    print(f"Extracted Nepali date: {nepali_date_str}")
-                    return nepali_date_str
+            # Get month name
+            month_name = self.get_nepali_month_name(today_nepali.month)
             
-            return None
+            # Convert day and year to Nepali digits
+            day_num = self.convert_english_to_nepali_digits(today_nepali.day)
+            year_num = self.convert_english_to_nepali_digits(today_nepali.year)
+            
+            # Format: "१४ पुष २०८१, सोमबार" (same format as onlinekhabar)
+            formatted_date = f"{day_num} {month_name} {year_num}, {day_name}"
+            
+            print(f"Nepali date calculated: {formatted_date}")
+            return formatted_date
+            
         except Exception as e:
-            print(f"Error fetching date from HamroPatro API: {e}")
+            print(f"Error calculating Nepali date: {e}")
             return None
     
     def update_date(self):
         try:
-            # Get date from HamroPatro API
-            nepali_date_str = self.get_nepali_date_from_hamropatro()
+            # Get date using nepali-datetime library (no network required)
+            nepali_date_str = self.get_nepali_date_local()
             
             if nepali_date_str:
-                # For the day name, use the English weekday as a reference
-                eng_now = datetime.now()
-                eng_weekday = eng_now.weekday()
-                day_name = self.get_nepali_day_name(eng_weekday)
-                print(f"Debug - Calculated day_name: '{day_name}'")
-                
-                # Format date with Nepali date string and day name
-                formatted_date = f"{nepali_date_str}, {day_name}"
-                
-                print(f"Debug - Formatted date to be set: '{formatted_date}'")
+                # Format: "१४ पुष २०८१, सोमबार"
+                print(f"Debug - Nepali date: '{nepali_date_str}'")
                 
                 # Update the title in status bar
-                self.title = formatted_date
+                self.title = nepali_date_str
             else:
-                print("Failed to get date from HamroPatro API")
+                print("Failed to calculate Nepali date")
                 self.title = "दिना: अनुपलब्ध"  # "Date: Unavailable" in Nepali
                 
         except Exception as e:

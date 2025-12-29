@@ -6,11 +6,11 @@ echo "Building Nepali Date Status Bar App with PyInstaller..."
 python3 -m venv venv
 source venv/bin/activate
 
-# Install dependencies (removed Pillow since not needed)
+# Install dependencies
 pip3 install --upgrade pip
 pip3 install rumps==0.4.0
 pip3 install pyobjc-framework-Cocoa==9.2
-pip3 install requests==2.31.0
+pip3 install nepali-datetime
 pip3 install pyinstaller
 
 # Verify icons exist
@@ -37,7 +37,8 @@ pyinstaller --name="Nepali Date" \
             --clean \
             --add-data="calendar.png:." \
             --hidden-import=rumps \
-            --hidden-import=requests \
+            --hidden-import=nepali_datetime \
+            --collect-all=nepali_datetime \
             --icon="calendar.icns" \
             nepali_date_statusbar.py
 

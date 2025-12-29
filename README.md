@@ -103,4 +103,4 @@ This app works completely offline. No data is collected or transmitted. The Nepa
 
 ## License
 
-MIT License
+This project is licensed under the [MIT License](LICENSE).

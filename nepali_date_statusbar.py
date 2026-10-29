@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 import rumps
 from datetime import datetime
+from zoneinfo import ZoneInfo
 import threading
 import time
 import os
 import sys
 import webbrowser
-from nepali_datetime import date as nepali_date
+from bikram import convert_ad_to_bs
+
+NEPAL_TZ = ZoneInfo("Asia/Kathmandu")
 
 class NepaliDateStatusBarApp(rumps.App):
     def __init__(self):
@@ -70,24 +73,23 @@ class NepaliDateStatusBarApp(rumps.App):
                 nepali_number += digit
         return nepali_number
 
+    def get_today_ad_in_nepal(self):
+        """Gregorian calendar date for 'today' in Nepal (Asia/Kathmandu)."""
+        return datetime.now(NEPAL_TZ).date()
+
     def get_nepali_date_local(self):
         """
-        Get Nepali date using nepali-datetime library (no network required)
+        Get Nepali date using the bikram library (official month-length tables; no network).
         Returns the full Nepali date string with day name
         Format: "१४ पुष २०८१, सोमबार"
         """
         try:
-            # Get today's Nepali date using the library
-            today_nepali = nepali_date.today()
-            
-            # Get day of week from English date
-            eng_weekday = datetime.now().weekday()
-            day_name = self.get_nepali_day_name(eng_weekday)
-            
-            # Get month name
+            today_ad = self.get_today_ad_in_nepal()
+            today_nepali = convert_ad_to_bs(today_ad)
+
+            day_name = self.get_nepali_day_name(today_ad.weekday())
             month_name = self.get_nepali_month_name(today_nepali.month)
-            
-            # Convert day and year to Nepali digits
+
             day_num = self.convert_english_to_nepali_digits(today_nepali.day)
             year_num = self.convert_english_to_nepali_digits(today_nepali.year)
             
@@ -103,7 +105,6 @@ class NepaliDateStatusBarApp(rumps.App):
     
     def update_date(self):
         try:
-            # Get date using nepali-datetime library (no network required)
             nepali_date_str = self.get_nepali_date_local()
             
             if nepali_date_str:
